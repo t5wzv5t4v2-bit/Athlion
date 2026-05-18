@@ -531,22 +531,34 @@
     ============================================================ */
     #diensten { background: var(--black); }
 
+    .services-intro {
+      max-width: 680px;
+      color: rgba(255,255,255,0.62);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-top: -8px;
+    }
+
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2px;
       margin-top: 60px;
     }
 
     .service-card {
       background: #0d0d0d;
-      padding: 48px 36px;
+      color: var(--white);
+      min-height: 320px;
+      padding: 38px 28px 32px;
       border: 1px solid rgba(255,255,255,0.07);
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
-      transition: background 0.3s;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, transform 0.25s var(--ease-out);
     }
 
     .service-card::before {
@@ -560,33 +572,280 @@
       transition: transform 0.4s var(--ease-out);
     }
 
-    .service-card:hover { background: #141414; }
-    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover,
+    .service-card:focus-visible {
+      background: #141414;
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-4px);
+      outline: none;
+    }
+
+    .service-card:hover::before,
+    .service-card:focus-visible::before { transform: scaleX(1); }
+
+    .service-card.is-shop {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.015)),
+        #0d0d0d;
+    }
 
     .service-number {
       font-family: var(--font-display);
       font-size: 0.65rem;
       letter-spacing: 0.25em;
       color: var(--mid-gray);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .service-card h3 {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.24rem;
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       line-height: 1.2;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .service-card p {
+    .service-audience {
       font-size: 0.9rem;
       line-height: 1.75;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 36px;
+      color: rgba(255,255,255,0.62);
       flex: 1;
+    }
+
+    .service-audience strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 8px;
+    }
+
+    .service-card-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .service-card-action span:last-child {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .services-shop-note {
+      margin-top: 28px;
+      padding: 22px 28px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #080808;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .services-shop-note h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .services-shop-note p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+    }
+
+    .service-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .service-modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .service-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .service-modal-panel {
+      position: relative;
+      z-index: 1;
+      width: min(980px, 100%);
+      max-height: min(86vh, 920px);
+      background: #050505;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 34px 110px rgba(0,0,0,0.65);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.76fr 1.24fr;
+    }
+
+    .modal-side {
+      background: var(--white);
+      color: var(--black);
+      padding: 42px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 520px;
+    }
+
+    .modal-side img {
+      width: 82px;
+      filter: none;
+      margin-bottom: 34px;
+    }
+
+    .modal-side-label {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 14px;
+    }
+
+    .modal-side h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 22px;
+    }
+
+    .modal-side p {
+      color: rgba(0,0,0,0.68);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .modal-price {
+      border-top: 1px solid rgba(0,0,0,0.16);
+      padding-top: 26px;
+      margin-top: 32px;
+    }
+
+    .modal-price span {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.44);
+      margin-bottom: 8px;
+    }
+
+    .modal-price strong {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .modal-main {
+      padding: 42px 46px;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.58);
+      color: var(--white);
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      z-index: 2;
+    }
+
+    .modal-close:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .modal-section {
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .modal-section:last-child {
+      margin-bottom: 0;
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .modal-section h4 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 16px;
+    }
+
+    .modal-section p,
+    .modal-section li {
+      color: rgba(255,255,255,0.68);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .modal-section ul,
+    .modal-section ol {
+      margin-left: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .modal-section li strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
     }
 
     /* ============================================================
@@ -913,7 +1172,19 @@
 
       .two-col .reveal-right { order: -1; }
 
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-modal { padding: 16px; }
+      .service-modal-panel {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+      }
+      .modal-side {
+        min-height: auto;
+        padding: 30px 28px;
+      }
+      .modal-side img { width: 62px; margin-bottom: 22px; }
+      .modal-price { margin-top: 24px; }
+      .modal-main { padding: 32px 28px; }
 
       .footer-right { grid-template-columns: 1fr; gap: 32px; }
 
@@ -922,6 +1193,9 @@
 
     @media (max-width: 600px) {
       .hero-ctas { flex-direction: column; align-items: center; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 280px; }
+      .services-shop-note { flex-direction: column; align-items: flex-start; }
       .shop-ctas { flex-direction: column; align-items: center; }
       .footer-bottom-inner { flex-direction: column; text-align: center; }
       .footer-brand { gap: 16px; }
@@ -1094,45 +1368,103 @@
       <div class="reveal">
         <p class="section-label">Wat Wij Bieden</p>
         <h2 class="section-title">Onze Diensten</h2>
+        <p class="services-intro">
+          Kies het traject dat past bij jouw niveau, agenda en ambitie. Klik op een dienst voor de volledige uitleg, inhoud, werkwijze en investering.
+        </p>
       </div>
 
       <div class="services-grid">
 
-        <!-- Dienst 1: 1-op-1 Coaching -->
-        <div class="service-card reveal">
+        <button class="service-card reveal" type="button" data-service="all-access" style="transition-delay: 0s;">
           <p class="service-number">01</p>
-          <h3>1-op-1<br>Coaching</h3>
-          <p>Maximale progressie door persoonlijke begeleiding op maat door twee coaches. Samen optimaliseren we jouw training, voeding en herstel om de ultieme hybride atleet te worden. Dankzij het korte contact kun je ons 24/7 appen voor ondersteuning, zodat je nooit alleen voor een uitdaging staat.</p>
-          <a class="btn btn-primary"
-             href="mailto:info@athlionsports.nl?subject=Aanvraag%201-op-1%20Coaching">
-            Aanvragen
-          </a>
-        </div>
+          <h3>Athlion All-Access<br>Lifestyle Coaching</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Ondernemers en professionals die geen tijd willen verliezen aan uitzoekwerk en hun fysieke voortgang volledig willen laten beheren.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
 
-        <!-- Dienst 2: Trainingsschema's -->
-        <div class="service-card reveal" style="transition-delay: 0.12s;">
+        <button class="service-card reveal" type="button" data-service="lifestyle" style="transition-delay: 0.06s;">
           <p class="service-number">02</p>
-          <h3>Trainingsschema's<br>12 Weken</h3>
-          <p>Word een Athletic Champion met onze specialistische schema's. Of je nu focust op de combinatie van kracht en hardlopen, HYROX of vechtsport: dit 12-weken plan biedt de structuur en periodisering die nodig is voor meetbaar resultaat op elk vlak en een ijzersterke basis.</p>
-          <a class="btn btn-primary"
-             href="mailto:info@athlionsports.nl?subject=Aanvraag%20Trainingsschema">
-            Aanvragen
-          </a>
-        </div>
+          <h3>1-op-1 Lifestyle Coaching:<br>Road to Athletic Champion</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Beginners en gevorderden die training, voeding en herstel willen optimaliseren met directe begeleiding en wekelijkse check-ins.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
 
-        <!-- Dienst 3: Kleding / Shop -->
-        <div class="service-card reveal" style="transition-delay: 0.24s;">
+        <button class="service-card reveal" type="button" data-service="audit" style="transition-delay: 0.12s;">
           <p class="service-number">03</p>
-          <h3>Athlion<br>Kleding</h3>
-          <p>Performance wear ontworpen voor de grenzeloze atleet. Onze kleding combineert technische innovatie met een esthetisch design, zodat je zowel in de gym, op de mat als op de baan optimaal presteert. Duurzaam, functioneel en gebouwd voor maximale intensiteit tijdens elke training.</p>
-          <a class="btn btn-secondary" href="#shop">
-            Naar Shop
-          </a>
-        </div>
+          <h3>Athlion Performance Audit:<br>Expert-check</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Zelfstandige sporters die periodiek objectieve data, techniekfeedback en een concreet actieplan willen.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
 
+        <button class="service-card reveal" type="button" data-service="training" style="transition-delay: 0.18s;">
+          <p class="service-number">04</p>
+          <h3>Gepersonaliseerde Blueprint:<br>Trainingsschema</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Serieuze sporters die professionele richting zoeken zonder volledige 1-op-1 coaching.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
+
+        <button class="service-card reveal" type="button" data-service="voeding" style="transition-delay: 0.24s;">
+          <p class="service-number">05</p>
+          <h3>Gepersonaliseerde Blueprint:<br>Voedingsschema</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Sporters die voeding strategisch willen inzetten voor spieropbouw, vetverlies, herstel en performance.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
+
+        <button class="service-card reveal" type="button" data-service="combi" style="transition-delay: 0.30s;">
+          <p class="service-number">06</p>
+          <h3>Combi Deal:<br>Word Je Eigen Coach</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Gedreven sporters die training en voeding in een compleet systeem willen combineren en zelfstandig leren bijsturen.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
+
+        <button class="service-card reveal" type="button" data-service="discounts" style="transition-delay: 0.36s;">
+          <p class="service-number">07</p>
+          <h3>Discounts &<br>Rewards</h3>
+          <p class="service-audience"><strong>Voor wie</strong>Klanten die willen upgraden, resultaatgericht committen of in aanmerking komen voor Defensie- en First Responder-korting.</p>
+          <span class="service-card-action"><span>Bekijk details</span><span aria-hidden="true">+</span></span>
+        </button>
+
+        <a class="service-card is-shop reveal" href="#shop" style="transition-delay: 0.42s;">
+          <p class="service-number">08</p>
+          <h3>Athlion<br>Shop</h3>
+          <p class="service-audience"><strong>Coming soon</strong>Premium sportswear gebouwd voor atleten die geen compromissen sluiten. De eerste drop komt eraan.</p>
+          <span class="service-card-action"><span>Naar shop</span><span aria-hidden="true">+</span></span>
+        </a>
+
+      </div>
+
+      <div class="services-shop-note reveal">
+        <div>
+          <h3>Shop Coming Soon</h3>
+          <p>De Athlion Sports webshop blijft onderdeel van onze diensten. Premium sportswear, binnenkort beschikbaar.</p>
+        </div>
+        <a class="btn btn-secondary" href="#shop">Bekijk Shop</a>
       </div>
     </div>
   </section>
+
+
+
+  <div class="service-modal" id="serviceModal" aria-hidden="true">
+    <div class="service-modal-backdrop" data-modal-close></div>
+    <div class="service-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Sluiten" data-modal-close>&times;</button>
+      <aside class="modal-side">
+        <div>
+          <img src="logo.png" alt="Athlion Sports" />
+          <p class="modal-side-label">Athlion Sports</p>
+          <h3 id="modalTitle"></h3>
+          <p id="modalAudience"></p>
+        </div>
+        <div class="modal-price">
+          <span>Investering</span>
+          <strong id="modalPrice"></strong>
+        </div>
+      </aside>
+      <div class="modal-main" id="modalContent"></div>
+    </div>
+  </div>
+
 
   <hr class="divider" />
 
@@ -1256,9 +1588,11 @@
 
             <h4 style="margin-top: 32px;">Diensten</h4>
             <ul>
-              <li><a href="mailto:info@athlionsports.nl?subject=Aanvraag%201-op-1%20Coaching">1-op-1 Coaching</a></li>
-              <li><a href="mailto:info@athlionsports.nl?subject=Aanvraag%20Trainingsschema">Trainingsschema's 12 Weken</a></li>
-              <li><a href="#shop">Athlion Kleding</a></li>
+              <li><a href="#diensten">All-Access Lifestyle Coaching</a></li>
+              <li><a href="#diensten">Road to Athletic Champion</a></li>
+              <li><a href="#diensten">Performance Audit</a></li>
+              <li><a href="#diensten">Blueprints & Combi Deal</a></li>
+              <li><a href="#shop">Shop Coming Soon</a></li>
             </ul>
           </div>
 
@@ -1318,6 +1652,134 @@
       hamburger.classList.remove('active');
       document.body.style.overflow = '';
     }
+
+
+    const serviceDetails = {
+      "all-access": {
+        title: "Athlion All-Access Lifestyle Coaching",
+        audience: "Voor ondernemers en professionals die geen tijd willen verspillen aan uitzoeken hoe het moet, maar resultaat willen zien.",
+        price: "€499,- per maand",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>Wij nemen het denkwerk volledig van je over. Terwijl jij je focust op je werk, beheren wij jouw fysieke voortgang op basis van je agenda en data. Wij fungeren als jouw persoonlijke Performance Department, zodat je fysiek meegroeit met je zakelijke succes.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Wekelijkse Strategische Call:</strong> elke week 15 minuten contact om resultaten door te nemen en de komende 7 dagen te bepalen, volledig afgestemd op reizen, diners en deadlines.</li><li><strong>Menukaart-service:</strong> ga je ergens eten? App ons het restaurant en wij geven een concreet advies voor de beste keuze.</li><li><strong>Priority Support:</strong> directe lijn met je coaches via WhatsApp met voorrang op je vragen.</li><li><strong>Maandelijkse Performance Audit:</strong> fysieke metingen op locatie en techniek-sessies om uitvoering en resultaat scherp te houden.</li><li><strong>Volledige Monitoring:</strong> een compleet plan voor training, voeding en herstel dat dagelijks wordt bewaakt en bijgestuurd.</li></ul></div>
+          <div class="modal-section"><h4>Waarom dit werkt</h4><p>De grootste obstakels voor ondernemers zijn tijdgebrek en keuzestress. Door wekelijkse calls en de menukaart-service halen we die barrières weg. Jij volgt de koers die wij wekelijks voor je finetunen.</p></div>
+          <div class="modal-section"><h4>Hoe werkt het?</h4><ul><li><strong>Deep-Dive Intake:</strong> uitgebreide analyse van je status, medische achtergrond, agenda en lifestyle.</li><li><strong>Wekelijkse Finetuning:</strong> we plannen steeds een week vooruit en nemen je agenda door. Bij onverwachte situaties kun je direct bellen of appen.</li><li><strong>Data-Driven Regie:</strong> wij beheren je logs en spreadsheets, analyseren de cijfers en passen je plan aan op je actuele belastbaarheid.</li></ul></div>
+          <div class="modal-section"><h4>Beschikbaarheid</h4><p>Voor de selecte groep die begrijpt dat hun lichaam de motor is achter hun prestaties. Om kwaliteit en snelle responstijd te garanderen, is er plek voor slechts 3 personen tegelijkertijd.</p></div>`
+      },
+      "lifestyle": {
+        title: "1-op-1 Lifestyle Coaching: Road to Athletic Champion",
+        audience: "Voor beginners die een solide fundament willen leggen en gevorderden die vastlopen op een plateau.",
+        price: "€179,- per maand",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>Wij optimaliseren niet alleen je uren in de gym, maar juist de variabelen daarbuiten die je resultaat in de weg zitten. We bouwen een systeem rondom jouw leven waarin training, voeding en herstel naadloos aansluiten.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Gepersonaliseerde Blueprint:</strong> een hard trainings- en voedingsplan voor jouw fysiologie, ervaring en doelstellingen.</li><li><strong>Directe Begeleiding:</strong> uitgebreide intake, 24/7 toegang tot je coaches via WhatsApp en wekelijkse check-ins.</li><li><strong>Data-Monitoring & Bijsturing:</strong> analyse van logs, krachttoename en hersteldata, met directe aanpassingen bij stagnatie.</li><li><strong>Kennis & Zelfstandigheid:</strong> duidelijke uitleg achter onze keuzes, zodat je zelfstandig op topniveau leert presteren.</li></ul></div>
+          <div class="modal-section"><h4>Waarom dit werkt</h4><p>De meeste sporters falen niet door gebrek aan inzet, maar door gebrek aan structuur buiten de gym. Wij elimineren giswerk en zorgen dat je vanaf dag één efficiënt naar je doel werkt.</p></div>
+          <div class="modal-section"><h4>Hoe werkt het traject?</h4><ul><li><strong>Intake & Nulmeting:</strong> analyse van je huidige status, techniek en belastbaarheid.</li><li><strong>De Kalibratiefase:</strong> in de eerste 2 maanden finetunen we je voeding en training op basis van hoe jouw lichaam reageert.</li><li><strong>Continu Optimalisatie:</strong> wekelijkse weeg- en meetmomenten, analyse van logs en bijsturing om stagnatie te voorkomen.</li></ul></div>`
+      },
+      "audit": {
+        title: "De Athlion Performance Audit: Expert-check",
+        audience: "Voor gedisciplineerde sporters die zelfstandig trainen, maar periodiek expert-advies en objectieve data willen.",
+        price: "Losse audit €75,- / Quarterly Growth Pack €179,-",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>Jij houdt de regie over je eigen training, wij zorgen voor objectieve data en professionele sturing. Geen 24/7 begeleiding, wel zekerheid dat je op koers blijft.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Fysieke Progressie-Audit:</strong> lichaamsmeting met vetpercentage, spiermassa en omtrekken.</li><li><strong>Data-Gedreven Analyse:</strong> analyse van logs en RPE-scores om volume en herstelvensters aan te scherpen.</li><li><strong>Techniek Fine-tuning:</strong> live check op je belangrijkste lifts of sport-specifieke bewegingen.</li><li><strong>Pivot-Strategie:</strong> aanpassingen in voeding en herstelstrategie voor de komende 30 dagen.</li></ul></div>
+          <div class="modal-section"><h4>Waarom dit werkt</h4><p>Zelfstandig trainen leidt vaak tot blinde vlekken of onnodige plateaus. De audit toetst je gevoel aan harde data en geeft je vertrouwen om de rest van de maand vol gas te trainen.</p></div>
+          <div class="modal-section"><h4>Hoe werkt het traject?</h4><ul><li><strong>De Audit-Sessie:</strong> een intensieve 1-op-1 sessie waarin we meten, techniek beoordelen en je spreadsheet analyseren.</li><li><strong>De Roadmap:</strong> je vertrekt met concrete actiepunten en een plan voor de komende maand.</li></ul></div>
+          <div class="modal-section"><h4>Onze garantie</h4><p>Je gaat pas weg als je exact weet waar je staat en wat je moet doen om bij de volgende meting je oude records te verbreken.</p></div>`
+      },
+      "training": {
+        title: "Gepersonaliseerde Blueprint: Trainingsschema",
+        audience: "Serieuze sporters die professionele richting zoeken zonder volledige 1-op-1 coaching.",
+        price: "€49,- eenmalig",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>Geen standaard oefeningenlijst, maar een persoonlijk strijdplan afgestemd op jouw doelen, trainingsniveau en faciliteiten. De focus ligt op balans tussen kracht, spieropbouw en performance.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Maatwerk Schema:</strong> gebaseerd op belastbaarheid, voorkeuren en een uitgebreide intake.</li><li><strong>De Athlion Spreadsheet:</strong> een log-tool voor progressie, gewichten en herhalingen.</li><li><strong>Complete Handleiding:</strong> praktische trainingsrichtlijnen en instructies om later zelfstandig te finetunen.</li><li><strong>Optimale Structuur:</strong> een indeling voor balans in je fysiek, blessurepreventie en symmetrische opbouw.</li></ul></div>
+          <div class="modal-section"><h4>Hoe werkt het?</h4><ol><li>Intake via vragenlijst.</li><li>Analyse & ontwerp van jouw persoonlijke schema.</li><li>Levering inclusief spreadsheet en handleiding.</li><li>Executie: jij traint, logt data en managet je groei.</li></ol></div>
+          <div class="modal-section"><h4>Onze garantie</h4><p>Sluit het schema niet volledig aan op jouw situatie of omgeving, dan passen wij het kosteloos aan tot je direct aan de slag kunt.</p></div>`
+      },
+      "voeding": {
+        title: "Gepersonaliseerde Blueprint: Voedingsschema",
+        audience: "Voor sporters die voeding als strategisch instrument willen inzetten voor sneller en efficiënter resultaat.",
+        price: "€69,- eenmalig",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>Een volledig gepersonaliseerd voedingsplan dat aansluit op jouw fysiologie, trainingsintensiteit en levensstijl. Voeding is geen tijdelijk dieet, maar brandstof voor prestaties.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Maatwerk Voedingsplan:</strong> afgestemd op caloriebehoefte, macro-verdeling en doelen.</li><li><strong>De Athlion Spreadsheet:</strong> monitor voeding, lichaamscompositie en progressie nauwkeurig.</li><li><strong>Complete Handleiding:</strong> richtlijnen over nutriënt-timing, voedingskeuzes en supplementen.</li><li><strong>Flexibiliteit & Performance:</strong> een plan dat rekening houdt met je ritme en sociale leven.</li></ul></div>
+          <div class="modal-section"><h4>Waarom dit werkt</h4><p>Zonder juiste voeding blijft fysieke adaptatie uit. Wij vervangen gokken op gevoel door een onderbouwde structuur voor spiermassa, vetverlies en herstel.</p></div>
+          <div class="modal-section"><h4>Hoe werkt het?</h4><ol><li>Intake & analyse van metabolisme en voorkeuren.</li><li>Design van jouw voedingsstrategie.</li><li>Levering inclusief log-tools en educatieve handleiding.</li><li>Executie en langetermijnmanagement.</li></ol></div>
+          <div class="modal-section"><h4>Onze garantie</h4><p>Sluit het schema niet volledig aan op jouw situatie of omgeving, dan passen wij het kosteloos aan tot je 100% tevreden bent.</p></div>`
+      },
+      "combi": {
+        title: "Combi Deal: Word Je Eigen Coach",
+        audience: "Voor sporters die training en voeding samen willen beheersen en onafhankelijk willen leren bijsturen.",
+        price: "€99,- eenmalig",
+        html: `
+          <div class="modal-section"><h4>In het kort</h4><p>De ultieme blauwdruk voor volledige onafhankelijkheid: een gepersonaliseerd trainings- en voedingsplan dat naadloos op elkaar zijn afgestemd.</p></div>
+          <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Geïntegreerde Blueprint:</strong> training en voeding die elkaar versterken.</li><li><strong>Athlion Master-Tool:</strong> een geavanceerde spreadsheet voor lifts, voeding en progressie.</li><li><strong>Masterclass Handleidingen:</strong> gidsen over trainingsleer en fysiologie, zodat je begrijpt hoe je moet bijsturen.</li><li><strong>Strategisch Herstel:</strong> richtlijnen voor hydratatie, supplementen en rust.</li></ul></div>
+          <div class="modal-section"><h4>Waarom dit werkt</h4><p>Je leert zelf Progressive Overload en macro’s toepassen. Dit is de kortste weg naar een fysiek dat je niet alleen bouwt, maar ook begrijpt.</p></div>
+          <div class="modal-section"><h4>Hoe werkt het?</h4><ul><li><strong>Intake:</strong> dubbele analyse van doelen, niveau en dagelijks ritme.</li><li><strong>Systeemontwerp:</strong> een geïntegreerd plan voor maximale synergie.</li><li><strong>Overdracht:</strong> Blueprint, log-tools en educatieve gidsen.</li><li><strong>Zelfstandigheid:</strong> jij voert uit en stuurt je progressie aan met de opgedane kennis.</li></ul></div>
+          <div class="modal-section"><h4>Onze garantie</h4><p>Indien de plannen niet perfect aansluiten op jouw situatie, passen wij alles kosteloos aan totdat je met vertrouwen je eigen koers kunt varen.</p></div>`
+      },
+      "discounts": {
+        title: "Discounts",
+        audience: "Voor klanten die willen upgraden, commitment tonen of werkzaam zijn bij Defensie of als First Responder.",
+        price: "25% service discount op coaching en blueprints",
+        html: `
+          <div class="modal-section"><h4>Upgrade-service</h4><p>Heb je eerder een losse Blueprint aangeschaft en wil je overstappen naar volledige 1-op-1 begeleiding? Dan verrekenen wij de volledige aankoopprijs van je Blueprint met de eerste maand van je coachingstraject.</p></div>
+          <div class="modal-section"><h4>Performance Reward</h4><p>Halen we samen de doelen die we voor de eerste 3 maanden hebben vastgesteld? Dan belonen wij je inzet met 2 maanden gratis coaching.</p><ul><li><strong>Voorwaarde:</strong> de beloning is gebaseerd op gezamenlijke KPI's zoals krachttoename, vetpercentage, lichaamsgewicht of consistentie.</li><li><strong>Ambassadeursschap:</strong> bij verzilvering geef je Athlion toestemming om je transformatie en resultaten te gebruiken als referentie en promotiemateriaal.</li></ul></div>
+          <div class="modal-section"><h4>Service discounts</h4><p>Bij Athlion hebben we diep respect voor degenen die dienen. Ben je werkzaam bij Defensie of als First Responder (Politie, Brandweer, Ambulance), dan ontvang je 25% korting op al onze Coaching en Blueprints.</p></div>
+          <div class="modal-section"><h4>Hoe het werkt</h4><p>Vermeld je functie tijdens de intake of stuur een bericht via je werk-gerelateerde e-mailadres voor verificatie. Wij zorgen dat de korting direct op jouw factuur wordt verwerkt.</p></div>`
+      }
+    };
+
+    const serviceModal = document.getElementById('serviceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAudience = document.getElementById('modalAudience');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalContent = document.getElementById('modalContent');
+    let lastFocusedService = null;
+
+    function openServiceModal(key) {
+      const detail = serviceDetails[key];
+      if (!detail) return;
+
+      lastFocusedService = document.activeElement;
+      modalTitle.textContent = detail.title;
+      modalAudience.textContent = detail.audience;
+      modalPrice.textContent = detail.price;
+      modalContent.innerHTML = detail.html + `
+        <div class="modal-actions">
+          <a class="btn btn-primary" href="mailto:info@athlionsports.nl?subject=Aanvraag%20${encodeURIComponent(detail.title)}">Aanvragen</a>
+          <button class="btn btn-secondary" type="button" data-modal-close>Sluiten</button>
+        </div>`;
+      serviceModal.classList.add('open');
+      serviceModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      serviceModal.querySelector('.modal-close').focus();
+    }
+
+    function closeServiceModal() {
+      serviceModal.classList.remove('open');
+      serviceModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocusedService && typeof lastFocusedService.focus === 'function') {
+        lastFocusedService.focus();
+      }
+    }
+
+    document.querySelectorAll('[data-service]').forEach(card => {
+      card.addEventListener('click', () => openServiceModal(card.dataset.service));
+    });
+
+    serviceModal.addEventListener('click', (event) => {
+      if (event.target.matches('[data-modal-close]')) closeServiceModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && serviceModal.classList.contains('open')) {
+        closeServiceModal();
+      }
+    });
+
 
     /* ----------------------------------------------------------
        Scroll Reveal — Intersection Observer
