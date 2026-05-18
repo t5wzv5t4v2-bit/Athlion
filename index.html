@@ -676,9 +676,10 @@
       inset: 0;
       z-index: 2000;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       padding: 28px;
+      overflow-y: auto;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.28s ease;
@@ -701,8 +702,9 @@
       position: relative;
       z-index: 1;
       width: min(980px, 100%);
-      max-height: min(86vh, 920px);
+      height: min(86vh, 920px);
       min-height: 0;
+      margin: auto 0;
       background: #050505;
       border: 1px solid rgba(255,255,255,0.16);
       box-shadow: 0 34px 110px rgba(0,0,0,0.65);
@@ -777,6 +779,7 @@
 
     .modal-main {
       min-height: 0;
+      max-height: 100%;
       padding: 42px 46px;
       overflow-y: auto;
       overscroll-behavior: contain;
@@ -1181,7 +1184,10 @@
       .service-modal-panel {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        max-height: 90vh;
+        height: auto;
+        max-height: none;
+        margin: 0;
+        overflow: visible;
       }
       .modal-side {
         min-height: auto;
@@ -1189,7 +1195,11 @@
       }
       .modal-side img { width: 62px; margin-bottom: 22px; }
       .modal-price { margin-top: 24px; }
-      .modal-main { padding: 32px 28px; }
+      .modal-main {
+        max-height: none;
+        padding: 32px 28px;
+        overflow: visible;
+      }
 
       .footer-right { grid-template-columns: 1fr; gap: 32px; }
 
