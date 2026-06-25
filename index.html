@@ -475,7 +475,110 @@
 
     #visie .visie-text p:last-child { margin-bottom: 0; }
 
-    #visie .img-wrap { aspect-ratio: 3/4; }
+    .vision-system {
+      position: relative;
+      min-height: 520px;
+      padding: 42px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.015) 42%, transparent 42%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 72px),
+        #070707;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .vision-system::before,
+    .vision-system::after {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .vision-system::after {
+      inset: auto -18% 18% auto;
+      width: 62%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .vision-mark {
+      position: relative;
+      z-index: 1;
+      width: 88px;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+    }
+
+    .vision-statement {
+      position: relative;
+      z-index: 1;
+      max-width: 360px;
+    }
+
+    .vision-kicker {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 18px;
+    }
+
+    .vision-statement h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+      line-height: 0.96;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .vision-statement p {
+      color: rgba(255,255,255,0.62);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .vision-pillars {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .vision-pillar {
+      background: rgba(0,0,0,0.72);
+      padding: 18px 16px;
+      min-height: 92px;
+    }
+
+    .vision-pillar span {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.36);
+      margin-bottom: 12px;
+    }
+
+    .vision-pillar strong {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     /* ============================================================
        OVER ONS / TEAM SECTIE
@@ -1208,6 +1311,9 @@
 
     @media (max-width: 600px) {
       .hero-ctas { flex-direction: column; align-items: center; }
+      .vision-system { min-height: 460px; padding: 30px 24px; }
+      .vision-pillars { grid-template-columns: 1fr; }
+      .vision-pillar { min-height: 72px; }
       .services-grid { grid-template-columns: 1fr; }
       .service-card { min-height: 280px; }
       .services-shop-note { flex-direction: column; align-items: flex-start; }
@@ -1307,11 +1413,20 @@
           </div>
         </div>
 
-        <!-- Foto rechts -->
+        <!-- Visueel systeem rechts -->
         <div class="reveal-right">
-          <div class="img-wrap" style="aspect-ratio: 3/4;">
-            <img src="visie-foto.png" alt="Athlion Sports visie"
-                 onerror="this.style.display='none'; this.parentElement.classList.add('img-placeholder'); this.parentElement.setAttribute('data-label','visie-foto.png');" />
+          <div class="vision-system" aria-label="Athlion Sports trainingsvisie">
+            <img class="vision-mark" src="logo.png" alt="" />
+            <div class="vision-statement">
+              <p class="vision-kicker">Built to perform</p>
+              <h3>Looks.<br>Strength.<br>Endurance.</h3>
+              <p>Een fysiek dat niet alleen sterk oogt, maar ook presteert wanneer het erop aankomt.</p>
+            </div>
+            <div class="vision-pillars" aria-hidden="true">
+              <div class="vision-pillar"><span>01</span><strong>Kracht</strong></div>
+              <div class="vision-pillar"><span>02</span><strong>Conditie</strong></div>
+              <div class="vision-pillar"><span>03</span><strong>Herstel</strong></div>
+            </div>
           </div>
         </div>
 
