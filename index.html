@@ -839,13 +839,19 @@
       margin-bottom: 8px;
     }
 
-    .modal-price strong {
+    .modal-price strong,
+    .modal-price a {
+      display: inline-block;
       font-family: var(--font-display);
-      font-size: 1.45rem;
+      font-size: 1.05rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      color: var(--black);
+      word-break: break-word;
     }
+
+    .modal-price a:hover { opacity: 0.65; }
 
     .modal-main {
       min-height: 0;
@@ -1384,7 +1390,7 @@
             <img class="vision-mark" src="logo.png" alt="" />
             <div class="vision-statement">
               <p class="vision-kicker">Built to perform</p>
-              <h3>Looks.<br>Strength.<br>Endurance.</h3>
+              <h3>Strength.<br>Endurance.<br>Performance.</h3>
               <p>Een fysiek dat niet alleen sterk oogt, maar ook presteert wanneer het erop aankomt.</p>
             </div>
           </div>
@@ -1547,8 +1553,8 @@
           <p id="modalAudience"></p>
         </div>
         <div class="modal-price">
-          <span>Investering</span>
-          <strong id="modalPrice"></strong>
+          <span>Neem contact op</span>
+          <a id="modalContact" href="mailto:info@athlionsports.nl">info@athlionsports.nl</a>
         </div>
       </aside>
       <div class="modal-main" id="modalContent"></div>
@@ -1748,7 +1754,6 @@
       "all-access": {
         title: "Athlion All-Access Lifestyle Coaching",
         audience: "Voor ondernemers en professionals die geen tijd willen verspillen aan uitzoeken hoe het moet, maar resultaat willen zien.",
-        price: "€499,- per maand",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>Wij nemen het denkwerk volledig van je over. Terwijl jij je focust op je werk, begeleiden wij jouw fysieke progressie op basis van je agenda en data. Wij fungeren als jouw persoonlijke Performance Department, zodat je fysiek meegroeit met je zakelijke succes.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Wekelijkse Strategische Call:</strong> elke week 15 minuten contact om resultaten door te nemen en de komende 7 dagen te bepalen, volledig afgestemd op reizen, diners en deadlines.</li><li><strong>Menukaart-service:</strong> ga je ergens eten? App ons het restaurant en wij geven een concreet advies voor de beste keuze.</li><li><strong>Priority Support:</strong> directe lijn met je coaches via WhatsApp met voorrang op je vragen.</li><li><strong>Online Techniekanalyse:</strong> tijdens de wekelijkse calls nemen we ingestuurde video’s van oefeningen en uitvoering door, zodat je techniek gericht wordt aangescherpt binnen het online traject.</li><li><strong>Volledige Monitoring:</strong> een compleet plan voor training, voeding en herstel dat doorlopend wordt gevolgd en waar nodig wordt bijgestuurd.</li></ul></div>
@@ -1759,17 +1764,15 @@
       "lifestyle": {
         title: "1-op-1 Lifestyle Coaching: Road to Athletic Champion",
         audience: "Voor beginners die een solide fundament willen leggen en gevorderden die vastlopen op een plateau.",
-        price: "€179,- per maand",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>Wij optimaliseren niet alleen je uren in de gym, maar juist de variabelen daarbuiten die je resultaat in de weg zitten. We bouwen een systeem rondom jouw leven waarin training, voeding en herstel naadloos aansluiten.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Gepersonaliseerde Blueprint:</strong> een concreet trainings- en voedingsplan voor jouw fysiologie, ervaring en doelstellingen.</li><li><strong>Directe Begeleiding:</strong> uitgebreide intake, toegang tot je coaches via WhatsApp en wekelijkse check-ins.</li><li><strong>Datamonitoring & Bijsturing:</strong> analyse van logs, krachttoename en hersteldata, met directe aanpassingen bij stagnatie.</li><li><strong>Kennis & Zelfstandigheid:</strong> duidelijke uitleg achter onze keuzes, zodat je zelfstandig op topniveau leert presteren.</li></ul></div>
           <div class="modal-section"><h4>Waarom dit werkt</h4><p>De meeste sporters falen niet door gebrek aan inzet, maar door gebrek aan structuur buiten de gym. Wij elimineren giswerk en zorgen dat je vanaf dag één efficiënt naar je doel werkt.</p></div>
-          <div class="modal-section"><h4>Hoe werkt het traject?</h4><ul><li><strong>Intake & Nulmeting:</strong> analyse van je huidige status, techniek, belastbaarheid en aangeleverde data.</li><li><strong>De Kalibratiefase:</strong> in de eerste 2 maanden finetunen we je voeding en training op basis van hoe jouw lichaam reageert.</li><li><strong>Continu Optimalisatie:</strong> wekelijkse voortgangsmomenten, analyse van logs en bijsturing om stagnatie te voorkomen.</li></ul></div>`
+          <div class="modal-section"><h4>Hoe werkt het traject?</h4><ul><li><strong>Intake & Nulmeting:</strong> analyse van je huidige status, techniek, belastbaarheid en aangeleverde data.</li><li><strong>De Kalibratiefase:</strong> in de eerste 2 weken finetunen we je voeding en training op basis van hoe jouw lichaam reageert.</li><li><strong>Continu Optimalisatie:</strong> wekelijkse voortgangsmomenten, analyse van logs en bijsturing om stagnatie te voorkomen.</li></ul></div>`
       },
       "audit": {
         title: "De Athlion Performance Audit: Expert-check",
         audience: "Voor gedisciplineerde sporters die zelfstandig trainen, maar periodiek online expert-advies en techniekfeedback willen.",
-        price: "Losse audit €75,- / Quarterly Growth Pack €179,-",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>Jij houdt de regie over je eigen training, wij zorgen online voor professionele feedback en gerichte bijsturing. Geen volledige coaching, wel helderheid over je volgende stappen.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Online Progressie-Audit:</strong> analyse van je trainingslogs, progressiefoto’s, lichaamsgewicht, omtrekken en andere data die je digitaal aanlevert.</li><li><strong>Datagedreven Analyse:</strong> analyse van logs en RPE-scores om volume en herstelvensters aan te scherpen.</li><li><strong>Techniek Fine-tuning:</strong> feedback op ingestuurde video’s van je belangrijkste lifts of sport-specifieke bewegingen.</li><li><strong>Pivot-Strategie:</strong> aanpassingen in training, voeding en herstelstrategie voor de komende 30 dagen.</li></ul></div>
@@ -1780,7 +1783,6 @@
       "training": {
         title: "Gepersonaliseerde Blueprint: Trainingsschema",
         audience: "Serieuze sporters die professionele richting zoeken zonder volledige 1-op-1 coaching.",
-        price: "€49,- eenmalig",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>Geen standaard oefeningenlijst, maar een persoonlijk strijdplan afgestemd op jouw doelen, trainingsniveau en faciliteiten. De focus ligt op balans tussen kracht, spieropbouw en performance.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Maatwerk Schema:</strong> gebaseerd op belastbaarheid, voorkeuren en een uitgebreide intake.</li><li><strong>De Athlion Spreadsheet:</strong> een log-tool voor progressie, gewichten en herhalingen.</li><li><strong>Complete Handleiding:</strong> praktische trainingsrichtlijnen en instructies om later zelfstandig te finetunen.</li><li><strong>Optimale Structuur:</strong> een indeling voor balans in je fysiek, blessurepreventie en symmetrische opbouw.</li></ul></div>
@@ -1790,7 +1792,6 @@
       "voeding": {
         title: "Gepersonaliseerde Blueprint: Voedingsschema",
         audience: "Voor sporters die voeding als strategisch instrument willen inzetten voor sneller en efficiënter resultaat.",
-        price: "€69,- eenmalig",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>Een volledig gepersonaliseerd voedingsplan dat aansluit op jouw fysiologie, trainingsintensiteit en levensstijl. Voeding is geen tijdelijk dieet, maar brandstof voor prestaties.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Maatwerk Voedingsplan:</strong> afgestemd op caloriebehoefte, macro-verdeling en doelen.</li><li><strong>De Athlion Spreadsheet:</strong> monitor voeding, lichaamscompositie en progressie nauwkeurig.</li><li><strong>Complete Handleiding:</strong> richtlijnen over nutriënt-timing, voedingskeuzes en supplementen.</li><li><strong>Flexibiliteit & Performance:</strong> een plan dat rekening houdt met je ritme en sociale leven.</li></ul></div>
@@ -1801,7 +1802,6 @@
       "combi": {
         title: "Combi Deal: Word Je Eigen Coach",
         audience: "Voor sporters die training en voeding samen willen beheersen en onafhankelijk willen leren bijsturen.",
-        price: "€99,- eenmalig",
         html: `
           <div class="modal-section"><h4>In het kort</h4><p>De ultieme blauwdruk voor volledige onafhankelijkheid: een gepersonaliseerd trainings- en voedingsplan dat naadloos op elkaar is afgestemd.</p></div>
           <div class="modal-section"><h4>Wat krijg je?</h4><ul><li><strong>Geïntegreerde Blueprint:</strong> training en voeding die elkaar versterken.</li><li><strong>Athlion Master-Tool:</strong> een geavanceerde spreadsheet voor lifts, voeding en progressie.</li><li><strong>Masterclass Handleidingen:</strong> gidsen over trainingsleer en fysiologie, zodat je begrijpt hoe je moet bijsturen.</li><li><strong>Strategisch Herstel:</strong> richtlijnen voor hydratatie, supplementen en rust.</li></ul></div>
@@ -1812,7 +1812,6 @@
       "discounts": {
         title: "Discounts",
         audience: "Voor klanten die willen upgraden, zich resultaatgericht willen committeren of werkzaam zijn bij Defensie of als hulpverlener.",
-        price: "15% servicekorting op coaching en blueprints",
         html: `
           <div class="modal-section"><h4>Upgrade-service</h4><p>Heb je eerder een losse Blueprint aangeschaft en wil je overstappen naar volledige 1-op-1 begeleiding? Dan verrekenen wij de volledige aankoopprijs van je Blueprint met de eerste maand van je coachingstraject.</p></div>
           <div class="modal-section"><h4>Performance reward</h4><p>Halen we samen de doelen die we voor de eerste 3 maanden hebben vastgesteld? Dan belonen wij je inzet met 2 maanden gratis coaching.</p><ul><li><strong>Voorwaarde:</strong> de beloning is gebaseerd op gezamenlijke KPI’s zoals krachttoename, vetpercentage, lichaamsgewicht of consistentie.</li><li><strong>Ambassadeursschap:</strong> bij verzilvering geef je Athlion toestemming om je transformatie en resultaten te gebruiken als referentie en promotiemateriaal.</li></ul></div>
@@ -1824,7 +1823,6 @@
     const serviceModal = document.getElementById('serviceModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalAudience = document.getElementById('modalAudience');
-    const modalPrice = document.getElementById('modalPrice');
     const modalContent = document.getElementById('modalContent');
     let lastFocusedService = null;
 
@@ -1835,10 +1833,9 @@
       lastFocusedService = document.activeElement;
       modalTitle.textContent = detail.title;
       modalAudience.textContent = detail.audience;
-      modalPrice.textContent = detail.price;
       modalContent.innerHTML = detail.html + `
         <div class="modal-actions">
-          <a class="btn btn-primary" href="mailto:info@athlionsports.nl?subject=Aanvraag%20${encodeURIComponent(detail.title)}">Aanvragen</a>
+          <a class="btn btn-primary" href="mailto:info@athlionsports.nl?subject=Aanvraag%20${encodeURIComponent(detail.title)}">Neem contact op</a>
           <button class="btn btn-secondary" type="button" data-modal-close>Sluiten</button>
         </div>`;
       serviceModal.classList.add('open');
